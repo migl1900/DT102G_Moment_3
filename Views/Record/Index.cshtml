@@ -1,0 +1,74 @@
+﻿@model IEnumerable<DT102G_Moment3.Models.Record>
+
+@{
+    ViewData["Title"] = "Skivor";
+}
+
+<h1>Skivor</h1>
+
+<!-- Search function -->
+<form asp-controller="Record" asp-action="Index" method="get">
+    <p>
+        <input type="text" class="p-2" name="SearchString" />
+        <input type="submit" class="btn btn-primary" value="Sök" />
+        <button type="button" class="btn btn-secondary" onclick="location.href = '@Url.Action("Index", "Record")'">Återställ</button>
+    </p>
+</form>
+
+<p>
+    <a asp-action="Create">Lägg till skiva</a> | 
+    <a asp-controller="Artist" asp-action="Index">Lägg till artist</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Artist.Name)
+            </th>
+            <th>
+                Status
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Artist.Name)
+            </td>
+            <td>
+                @{
+                    // Check if id exist in Lendings table
+                    List<Lending> lendings = ViewData["Lendings"] as List<Lending>;
+                    if (lendings.Exists(x => x.RecordId == item.RecordId))
+                    {
+                        <p>Utlånad</p>
+                    }
+                    else
+                    {
+                        <p>Finns på lager</p>
+                    }
+                }
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.RecordId">Editera</a> |
+                <a asp-action="Details" asp-route-id="@item.RecordId">Detaljer</a> |
+                <a asp-action="Delete" asp-route-id="@item.RecordId">Radera</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

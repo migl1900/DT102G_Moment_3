@@ -1,0 +1,47 @@
+﻿@model IEnumerable<DT102G_Moment3.Models.Lending>
+
+@{
+    ViewData["Title"] = "Låna ut skiva";
+}
+
+<h1>Låna ut skiva</h1>
+
+<p>
+    <a asp-action="Create">Låna ut till</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecordId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Record.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.LendingId">Editera</a> |
+                <a asp-action="Details" asp-route-id="@item.LendingId">Detaljer</a> |
+                <a asp-action="Delete" asp-route-id="@item.LendingId">Radera</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

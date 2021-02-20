@@ -1,0 +1,26 @@
+﻿@model DT102G_Moment3.Models.Artist
+
+@{
+    ViewData["Title"] = "Radera artist";
+}
+
+<h1>Radera Artist</h1>
+
+<h4>Är du säker på att du vill radera artisten?</h4>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ArtistId" />
+        <input type="submit" value="Radera" class="btn btn-danger" /> |
+        <a asp-action="Index">Tillbaka</a>
+    </form>
+</div>

@@ -1,0 +1,24 @@
+﻿@model DT102G_Moment3.Models.Artist
+
+@{
+    ViewData["Title"] = "Detaljer";
+}
+
+<h1>Detaljer</h1>
+
+<div>
+    <h4>Artist</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ArtistId">Editera</a> |
+    <a asp-action="Index">Tillbaka</a>
+</div>
