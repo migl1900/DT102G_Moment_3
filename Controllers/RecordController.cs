@@ -22,6 +22,7 @@ namespace DT102G_Moment3.Controllers
         // GET: Record
         public async Task<IActionResult> Index(string searchString) // Enable filtering result
         {
+            ViewBag.Search = searchString;
             var lendings = _context.Lendings.ToList(); // Get all posts in Lending table
             ViewData["Lendings"] = lendings; // Send list to view
             var collectionContext = _context.Records.Include(item => item.Artist); // Get all posts from Records and Artists
